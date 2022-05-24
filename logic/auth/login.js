@@ -1,8 +1,7 @@
 const config = require("../../config.js");
-const DB = require(config.LOGIC + "/helpers/DB.js");
 const authenticator = require("./authenticator.js");
 const bcrypt = require("bcryptjs");
-const {User} = require(config.LOGIC + "/helpers/_DB.js");
+const {User} = require(config.LOGIC + "/helpers/DB.js");
 
 /* function login
 * @Method : POST

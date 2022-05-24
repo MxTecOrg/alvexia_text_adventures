@@ -77,6 +77,11 @@ const friendList = {
     invitations : []
 };
 
+const quests = {
+    q : "t_1",
+    progress : 0
+};
+
 const UserModel = (DataTypes) => {
     return {
         user_id: {
@@ -161,9 +166,17 @@ const UserModel = (DataTypes) => {
             type: DataTypes.STRING,
             defaultValue: "na"
         },
+        zone : {
+            type: DataTypes.STRING,
+            defaultValue: "a_0_0"
+        },
         mails : {
             type: DataTypes.STRING,
             defaultValue: "[]"
+        },
+        quests : {
+            type: DataTypes.STRING,
+            defaultValue: JSON.stringify(quests)
         },
         banList: {
             type: DataTypes.STRING,
