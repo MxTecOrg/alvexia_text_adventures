@@ -1,7 +1,8 @@
 const config = require("../../config.js");
+const DB = require(config.LOGIC + "/helpers/DB.js");
 const authenticator = require("./authenticator.js");
 const bcrypt = require("bcryptjs");
-const {User} = require(config.LOGIC + "/helpers/DB.js");
+const {User} = require(config.LOGIC + "/helpers/_DB.js");
 
 /* function login
 * @Method : POST
@@ -29,12 +30,20 @@ const login = async (req, res) => {
         where : {
             username : username
         }
-    });
+    });// await DB.findUserByName(username);
 
     if (!account) {
         return res.json({
             status: false,
             data: "WRONG_USER"
+        });
+    }
+    
+    if(!account.verified){
+        return res.json({
+            status : false,
+            data : "ACC_NOT_VERIFIED",
+            email: account.email
         });
     }
 

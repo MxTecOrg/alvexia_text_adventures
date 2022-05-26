@@ -1,87 +1,3 @@
-const attributes = {
-    sta: 0,
-    con: 0,
-    str: 0,
-    agl: 0,
-    int: 0,
-    luck: 0
-};
-
-const equipment = {
-    weapon: "na",
-    head: "na",
-    shoulder: "na",
-    chest: "na",
-    belt: "na",
-    ring: "na",
-    neck: "na",
-    trinket: "na",
-    bracer: "na",
-    pants: "na",
-    boots: "na",
-    mount: "na"
-};
-
-const prof = {
-    main : {
-        type : "na",
-        level : 0,
-        xp : 0,
-        recipes : []
-    },
-    second : {
-        type : "na",
-        level : 0,
-        xp : 0,
-        recipes : []
-    }
-};
-
-const inventory = {
-    slots : 20,
-    armors : [],
-    consumables : [],
-    materials : [],
-    extra : []
-};
-
-const spells = {
-    s_0 : "na",
-    s_1 : "na",
-    s_2 : "na",
-    s_3 : "na",
-    s_4 : "na"
-};
-
-const vip = {
-    level : 0,
-    xp : 0
-};
-
-const coins = {
-    gold : 0,
-    gems : 0,
-    honor : 0,
-    valor : 0,
-    conquest : 0
-};
-
-const wallet = {
-    wallet : "na",
-    gen_wallet : "na"
-};
-
-const friendList = {
-    friends : [],
-    requests : [],
-    invitations : []
-};
-
-const quests = {
-    q : "t_1",
-    progress : 0
-};
-
 const UserModel = (DataTypes) => {
     return {
         user_id: {
@@ -111,86 +27,61 @@ const UserModel = (DataTypes) => {
         color: {
             type: DataTypes.STRING,
         },
+        desc: {
+            type: DataTypes.STRING
+        },
         pic: {
             type: DataTypes.STRING
         },
-        level: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
-        },
-        xp: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-        stat_points: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-        stats: {
-            type: DataTypes.STRING,
-            defaultValue: "{}"
-        },
-        attributes: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(attributes)
-        },
-        equipment: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(equipment)
-        },
-        inventory: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(inventory)
-        },
-        spells: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(spells)
-        },
-        prof: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(prof)
-        },
-        coins: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(coins)
-        },
-        wallet: {
-            type: DataTypes.STRING,
-            defaultValue: JSON.stringify(wallet)
-        },
-        guild : {
-            type: DataTypes.STRING,
-            defaultValue: "na"
-        },
-        party : {
-            type: DataTypes.STRING,
-            defaultValue: "na"
-        },
-        zone : {
-            type: DataTypes.STRING,
-            defaultValue: "a_0_0"
-        },
-        mails : {
+        rooms: {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        quests : {
+        bots: {
             type: DataTypes.STRING,
-            defaultValue: JSON.stringify(quests)
+            defaultValue: "[]"
+        },
+        channels: {
+            type: DataTypes.STRING,
+            defaultValue: "[]"
+        },
+        own_rooms: {
+            type: DataTypes.STRING,
+            defaultValue: "[]"
+        },
+        own_bots: {
+            type: DataTypes.STRING,
+            defaultValue: "[]"
+        },
+        own_channels: {
+            type: DataTypes.STRING,
+            defaultValue: "[]"
         },
         banList: {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        friendList: {
+        contacts: {
             type: DataTypes.STRING,
-            defaultValue: JSON.stringify(friendList)
+            defaultValue: "[]"
         },
-        daily_bonus: {
+        statuses: {
+            type: DataTypes.STRING,
+            defaultValue: "[]"
+        },
+        xcoins: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        avatar : {
+            type: DataTypes.STRING,
+            defaultValue: "{}"
+        },
+        daily: {
             type: DataTypes.INTEGER,
             defaultValue: 1
         },
-        acceptParty: {
+        acceptInvitations: {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
@@ -208,7 +99,7 @@ const UserModel = (DataTypes) => {
         },
         vip: {
             type: DataTypes.STRING,
-            defaultValue: JSON.stringify(vip)
+            defaultValue: "basic"
         },
         acclevel: {
             type: DataTypes.INTEGER,
