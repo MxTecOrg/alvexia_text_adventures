@@ -28,7 +28,7 @@ io.on("connection", async (socket) => {
             user_id : id
         }
     });
-    if (!user){ //!DB.findUserById(id)) {
+    if (!user){ 
         socket.emit("alert", "USER_NOT_FOUND");
         socket.disconnect();
         return;
@@ -45,11 +45,18 @@ io.on("connection", async (socket) => {
         isOnline : true
     });
 
-    client(io, socket, id);
+    //client(io, socket, id);
 
     socket.on("disconnect", async (data) => {
         //DB.setUserValue(id, "isOnline", false);
-        await user.setData({
+        
+        const _user = await User.findOne({
+            where: {
+                user_id: id
+            }
+        });
+        
+        await _user.setData({
             isOnline : false
         });
         delete io.sockets[id];

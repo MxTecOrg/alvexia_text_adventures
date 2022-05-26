@@ -1,7 +1,7 @@
 {
   "name": "alvexia_text_adventures",
   "version": "0.0.1",
-  "description": "Juego MMORPG basado en texto.",
+  "description": "...",
   "main": "server.js",
   "scripts": {
     "start": "node main.js",
@@ -22,7 +22,7 @@
     "node": "12.x"
   },
   "repository": {
-    "url": "https://github.com/MxTecOrg/alvexia_text_adventures"
+    "url": "https://github.com/MxTecOrg/xbook_app"
   },
   "license": "MIT",
   "keywords": [

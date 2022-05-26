@@ -98,7 +98,6 @@ const register = async (req, res) => {
 
 
     try {
-
         await User.create({
             user_id: parseInt(uid.num(8)),
             username: username,
@@ -108,12 +107,10 @@ const register = async (req, res) => {
             password: bcrypt.hashSync(password, 10)
         });
         sendToken(email);
-
         return res.json({
             status: true,
             data: "REGISTERED"
         });
-
     } catch (err) {
         console.log(err);
         return res.json({
@@ -121,7 +118,6 @@ const register = async (req, res) => {
             data: "DATA_ERROR",
             error: err
         });
-
     }
 }
 

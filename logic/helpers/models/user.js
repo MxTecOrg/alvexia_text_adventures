@@ -31,41 +31,30 @@ const UserModel = (DataTypes) => {
             type: DataTypes.STRING
         },
         pic: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: "def_pic"
         },
-        rooms: {
+        background_pic : {
+            type: DataTypes.STRING,
+            defaultValue: "def_bpic"
+        },
+        self_likes: {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        bots: {
+        likes: {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        channels: {
+        followed : {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        own_rooms: {
+        following : {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
-        own_bots: {
-            type: DataTypes.STRING,
-            defaultValue: "[]"
-        },
-        own_channels: {
-            type: DataTypes.STRING,
-            defaultValue: "[]"
-        },
-        banList: {
-            type: DataTypes.STRING,
-            defaultValue: "[]"
-        },
-        contacts: {
-            type: DataTypes.STRING,
-            defaultValue: "[]"
-        },
-        statuses: {
+        self_books: {
             type: DataTypes.STRING,
             defaultValue: "[]"
         },
@@ -73,15 +62,7 @@ const UserModel = (DataTypes) => {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        avatar : {
-            type: DataTypes.STRING,
-            defaultValue: "{}"
-        },
         daily: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
-        },
-        acceptInvitations: {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },

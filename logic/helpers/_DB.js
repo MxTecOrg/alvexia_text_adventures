@@ -1,8 +1,9 @@
 const config = require("../../config.js");
 const { Sequelize, Model, DataTypes, Op } = require("sequelize");
 const UserModel = require("./models/user.js");
-const RoomModel = require("./models/room.js");
-const MessageModel = require("./models/message.js");
+const BookModel = require("./models/book.js");
+const ChapterModel = require("./models/chapter.js");
+const PicModel = require("./models/pic.js");
 
 /**********************
  * Iniciando Conexion *
@@ -15,7 +16,7 @@ const sequelize = new Sequelize({
 
 (async () => {
     try {
-        sequelize.authenticate();
+        await sequelize.authenticate();
     } catch (err) {
         throw new Error("" + err)
     }
@@ -26,7 +27,7 @@ const sequelize = new Sequelize({
  *********************/
 class User extends Model {
     getData() {
-        const rows = ["user_id", "nickname", "color", "desc", "pic", "rooms", "bots", "channels", "own_rooms", "own_bots", "own_channels", "banList", "contacts", "statuses", "xcoins", "isOnline", "lastTimeOnline", "vip"];
+        const rows = ["user_id", "nickname", "color", "desc", "pic", "xcoins", "isOnline", "lastTimeOnline", "vip"];
         let ret = {};
         for (let row of rows) {
             if (this[row]) {
@@ -67,14 +68,13 @@ User.init(
     await User.sync();
 })();
 
-/*******************
- * Modelo de Rooms *
- *******************/
 
-class Room extends Model {
+/*********************
+ *  Modelo de Books  *
+ *********************/
+class Book extends Model {
     getData() {
-        const rows = ["chat_id", "type", "pic", "gType", "link", "name", "desc", "bgColor", "textColor", "owner", "admins", "members", "banList", "bots", "pinned"];
-
+        const rows = [];
         let ret = {};
         for (let row of rows) {
             if (this[row]) {
@@ -98,30 +98,30 @@ class Room extends Model {
             await this.update(parsedObj);
             return true;
         } catch (err) {
-            console.log(err);
+            console.err(err);
             return false;
         }
     }
 }
 
-Room.init(
-    RoomModel(DataTypes),
+Book.init(
+    BookModel(DataTypes),
     {
         sequelize
     }
 );
 
 (async () => {
-    await Room.sync();
+    await Book.sync();
 })();
 
-/***********************
- * Modelo de Mensajes *
- **********************/
 
-class Message extends Model {
+/*********************
+ * Modelo de Chapter *
+ *********************/
+class Chapter extends Model {
     getData() {
-        const rows = ["mess_id", "user_id", "user_nick", "user_color", "chat_id", "type", "reply", "shared", "isEdited", "isBot", "receivedBy", "seenBy","message","inline","keyboard","date"];
+        const rows = [];
         let ret = {};
         for (let row of rows) {
             if (this[row]) {
@@ -139,34 +139,80 @@ class Message extends Model {
         let parsedObj = {};
         for (let o in obj) {
             if (this[o] == undefined) continue;
-            parsedObj[o] = (typeof(obj) == "object" ? JSON.stringify(obj[o]) : obj[o]);
+            parsedObj[o] = (typeof(obj) === "object" ? JSON.stringify(obj[o]) : obj[o]);
         }
         try {
             await this.update(parsedObj);
             return true;
         } catch (err) {
-            console.log(err);
+            console.err(err);
             return false;
         }
     }
 }
 
-Message.init(
-    MessageModel(DataTypes),
+Chapter.init(
+    ChapterModel(DataTypes),
     {
         sequelize
     }
 );
 
+(async () => {
+    await Chapter.sync();
+})();
+
+/*********************
+ *   Modelo de Pics  *
+ *********************/
+class Pic extends Model {
+    getData() {
+        const rows = [];
+        let ret = {};
+        for (let row of rows) {
+            if (this[row]) {
+                try {
+                    ret[row] = JSON.parse(this[row]);
+                } catch (err) {
+                    ret[row] = this[row];
+                }
+            }
+        }
+        return ret;
+    }
+
+    async setData(obj) {
+        let parsedObj = {};
+        for (let o in obj) {
+            if (this[o] == undefined) continue;
+            parsedObj[o] = (typeof(obj) === "object" ? JSON.stringify(obj[o]) : obj[o]);
+        }
+        try {
+            await this.update(parsedObj);
+            return true;
+        } catch (err) {
+            console.err(err);
+            return false;
+        }
+    }
+}
+
+Pic.init(
+    UserModel(DataTypes),
+    {
+        sequelize
+    }
+);
 
 (async () => {
-    await Message.sync();
+    await Pic.sync();
 })();
 
 
 module.exports = {
     User,
-    Room,
-    Message,
+    Book,
+    Chapter,
+    Pic,
     Op
 }
